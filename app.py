@@ -53,7 +53,7 @@ app.layout = html.Div([
 		html.Br(),
 		html.Div(['Probability of Sucess for each round (p): ', 
 				  dcc.Input(id='p_input', min=0, max=1, value='0.5', type='number')],
-				  style={'padding': 5, 'padding-left':'100px', 'width':'50%', 'display': 'display-inblock', 'color': colors['text1']}),
+				  style={'padding': 5, 'padding-left':'100px', 'display': 'display-inblock', 'color': colors['text1']}),
 		html.Div(['Initial Amount (i): ',
 				  dcc.Input(id='i_input', value='10', type='number')],
 				  style={'padding': 5, 'padding-left':'100px', 'display': 'display-inblock', 'color': colors['text1']}),
