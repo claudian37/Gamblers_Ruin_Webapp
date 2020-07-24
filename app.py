@@ -10,6 +10,7 @@ from gamblers_ruin import GamblersRuin
 
 pio.templates.default='gridon'
 
+# Initiate app
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
@@ -19,6 +20,8 @@ app.scripts.append_script({'external_url': mathjax })
 server = app.server
 app.title=tabtitle
 
+
+# Set up 
 colors = {
 	'background': 'white',
 	'header': 'black',
@@ -44,6 +47,7 @@ based on the number of games entered with margin of error for a 95% confidence i
 The graph shows the outcome of each game and the balance at every round.
 '''
 
+# Set up layout
 app.layout = html.Div([
 		html.H1(children="Gambler's Ruin Demo", style={'color': colors['header'], 'padding': 30}),
 		html.Div([dcc.Markdown(children=markdown_text1)], style={'padding-left': 50, 'display': 'display-inblock'}),
