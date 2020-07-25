@@ -12,15 +12,10 @@ pio.templates.default='gridon'
 
 # Initiate app
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
-
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
-
-mathjax = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML'
-app.scripts.append_script({'external_url': mathjax })
 server = app.server
 
-
-# Set up 
+# Set up text and colors
 colors = {
 	'background': 'white',
 	'header': 'black',

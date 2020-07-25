@@ -9,7 +9,7 @@ class GamblersRuin(object):
 	At each round, the probability of the gambler winning is probability p and we assume that 
 	every round is independent and identically distributed.
 	p: probability that gambler is successful/ wins at each round.
-	m: gambler's initial amount of money/reserves
+	i: gambler's initial amount of money/reserves
 	N: amount of money that the gambler hopes to reach in order to win the game.
 	'''
 	def __init__(self, p, i, N):
@@ -20,6 +20,8 @@ class GamblersRuin(object):
 		self.q = 1 - self.p
 
 	def gamble(self):
+		# For each game, generate a random float and add 1 to balance for "wins" and subtract
+		# 1 from balance for "loses"
 		sim_results = {}
 
 		while self.bal > 0 and self.bal < self.N:
@@ -37,6 +39,7 @@ class GamblersRuin(object):
 		return result	
 
 	def n_simulations(self, games=100):
+		# Gamble multiple times and record outcome/ balance of each round for every game
 		self.df_outcome = pd.DataFrame()
 
 		for game in np.arange(1,games+1):
@@ -51,6 +54,7 @@ class GamblersRuin(object):
 		return self.df_outcome
 		
 	def probability_win(self):
+		# Analytical solution for calculating probability of win given p, i and N
 		if self.p == self.q:
 			prob_win = self.i/self.N
 		else:
@@ -58,6 +62,7 @@ class GamblersRuin(object):
 		return prob_win
 
 	def probability_ruin(self):
+		# Analytical solution for calculating probability of ruin if you play infinite games
 		if self.p > 0.5:
 			prob_ruin = 1 - ((self.q/self.p) ** self.i)  
 		else:
@@ -65,9 +70,9 @@ class GamblersRuin(object):
 		return prob_ruin
 
 	def observed_perc(self):
+		# For all games played, what percentage of them did you win?
 		balance = list(self.df_outcome.loc[(self.df_outcome.balance==0) | (self.df_outcome.balance==self.N)]['balance'].copy())
 		
-		# Save final outcomes of each game to a list: 0 for ruin, 1 for achieving N
 		final_outcome = list(map(lambda x: 0 if x==0 else 1, balance))
 
 		conf_int = 0.95
